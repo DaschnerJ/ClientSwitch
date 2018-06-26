@@ -69,6 +69,9 @@ public class Client implements Runnable {
             }
             connect();
         }
+        Thread.setDefaultUncaughtExceptionHandler( (thread, throwable) -> {
+            os.println("error " + throwable.getMessage());
+        });
         OsCheck.OSType ostype=OsCheck.getOperatingSystemType();
         switch (ostype) {
             case Windows: {
@@ -123,6 +126,7 @@ public class Client implements Runnable {
                     e1.printStackTrace();
                 }
                 connect();
+
             }
             catch (IOException e) {
                 System.err.println("IOException:  " + e);
